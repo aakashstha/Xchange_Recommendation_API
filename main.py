@@ -1,7 +1,7 @@
-from bson.objectid import ObjectId
 import uvicorn
 from fastapi import FastAPI
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 import pandas as pd
 from fastapi.responses import JSONResponse
 from sklearn.feature_extraction.text import CountVectorizer
@@ -14,9 +14,8 @@ warnings.filterwarnings("ignore")
 # 2. Create the app object
 app = FastAPI()
 
+
 # Home route
-
-
 @app.get('/')
 def index():
     mydb = MongoClient(
@@ -27,7 +26,7 @@ def index():
     return {'message': 'Hello, World', 'count': a}
 
 
-#
+# Main route for predicting
 @app.get('/predict/{productId}')
 def get_name(productId: str):
     client = MongoClient(
